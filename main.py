@@ -16,10 +16,9 @@ import torch.utils.data
 from utility_functions import argument_parser
 from utility_functions import checkpoint_manager
 from utility_functions import cyclical_learning_rate
-from utility_functions.Criterion import MultiCriterion
 from ITrackerData import load_all_data
 from ITrackerModel import ITrackerModel
-from ModelZoo import DeepEyeModel
+# from ModelZoo import DeepEyeModel
 from utility_functions.Utilities import AverageMeter, ProgressBar, SamplingBar, Visualizations, resize, set_print_policy, getPublishedPort
 
 try:
@@ -347,9 +346,9 @@ def initialize_model(args):
             print('')
 
         # Retrieve model
-        if args.model_type == "deepEyeNet":
-            model = DeepEyeModel().to(device=args.device)
-        else:
+        #if args.model_type == "deepEyeNet":
+        #    model = DeepEyeModel().to(device=args.device)
+        #else:
             model = ITrackerModel(args.color_space, args.model_type).to(device=args.device)
         # print(model)
 
