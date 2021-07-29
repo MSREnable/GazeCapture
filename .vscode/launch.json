@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Prepare Eye Catcher (Docker)",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "Prepare Eye Catcher",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/app"
+                    }
+                ],
+                "projectType": "general"
+            }
+        }
+    ]
+}

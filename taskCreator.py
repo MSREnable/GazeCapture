@@ -1680,7 +1680,10 @@ if __name__ == '__main__':
         dataLoader = None
 
     # run the job
-    output = taskManager.job(taskFunction, taskData, dataLoader)
+    # output = taskManager.job(taskFunction, taskData, dataLoader, 1)
+    
+    # temporarily single thread this to simplify debugging
+    output = taskManager.job(taskFunction, taskData, dataLoader, 1)
 
     # post-processing after the task has completed
     if args.task == "CaptureDataDistributionTask":
