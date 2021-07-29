@@ -1,6 +1,4 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
         {
@@ -16,12 +14,12 @@
         },
         {
             "type": "docker-run",
-            "label": "Prepare Eye Catcher",
+            "label": "Step 1: ROI Detection",
             "dependsOn": [
 				"docker-build"
 			],
             "python": {
-                "args": ["--task", "'prepareEyeCatcherTask'", "--input", "/data/200407", "--output", "/data/out"],
+                "args": ["--task", "'ROIDetectionTask'", "--input", "/data/200407", "--output", "/data/meta"],
                 "file": "taskCreator.py"
             },
             "dockerRun": {
@@ -43,10 +41,37 @@
         },
         {
             "type": "docker-run",
-            "label": "train (reset)",
+            "label": "Step 2: ROI Extraction",
+            "dependsOn": [
+				"docker-build"
+			],
+            "python": {
+                "args": ["--task", "'ROIExtraction'", "--input", "/data/200407", "--metapath", "/data/meta", "--output", "/data/prepped"],
+                "file": "taskCreator.py"
+            },
+            "dockerRun": {
+                "volumes": [
+                    {
+                        "localPath": "/var/run/docker.sock",
+                        "containerPath": "/var/run/docker.sock"
+                    },
+                    {
+                        "localPath": "/data",
+                        "containerPath": "/data"
+                    },
+                    {
+                        "localPath": "${workspaceFolder}",
+                        "containerPath": "/app"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "Step 3: train (reset)",
             "dependsOn": ["docker-build"],
             "python": {
-                "args": ["--data_path", "/data/out-prepped", "--reset"],
+                "args": ["--data_path", "/data/prepped", "--reset"],
                 "file": "main.py"
             }
         }

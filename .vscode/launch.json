@@ -1,10 +1,10 @@
 {
     "configurations": [
         {
-            "name": "Prepare Eye Catcher (Docker)",
+            "name": "Step 1: ROI Detection",
             "type": "docker",
             "request": "launch",
-            "preLaunchTask": "Prepare Eye Catcher",
+            "preLaunchTask": "Step 1: ROI Detection",
             "python": {
                 "pathMappings": [
                     {
