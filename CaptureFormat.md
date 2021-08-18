@@ -206,8 +206,7 @@ appleRightEye/{frameId}.jpg
 2021-08-18
 
 * Noted that session metadata files as optional, as device model is now stored in the folder path
-* And other metadata can be inferred from the device model, orientation is not variable in our
-* capture app, and we only have one model of eye tracker in use
+* And other metadata can be inferred from the device model, orientation is not variable in our capture app, and we only have one model of eye tracker in use
 
 2020-07-27
 
