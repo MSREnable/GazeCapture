@@ -4,7 +4,22 @@ Schema Version 200407
 
 ## Overview
 
-Each capture session creates a new subdirectory for data capture.  There are a number of metadata files:
+Each capture session creates a new subdirectory for data capture.
+
+Our data captures are stored in a directory structure of:
+
+```
+schema version / device sku / user hash / session timestamp in ISO 8601
+```
+
+for example
+
+```
+200407/Surface_Pro_6_1796_Commercial/g1yfT+gSdqpLwVXmevzNDw/2020-08-12T04:49:38/
+```
+
+There are a number of optional metadata files.  Note that for our dataset, DeviceSKU
+is part of the directory structure and device metrics can be inferred from the device name.
 
 ```
  screen.json: {
@@ -41,9 +56,17 @@ For example 00001-00015.jpg/00001-00015.json, 00003-00007.jpg/00003-00007.json, 
   }
 ```
 
+for example:
+
+```
+frames/00032-00019.jpg
+frames/00032-00019.json
+```
+
 Confidence is set to 'pixel distance of gaze position from gaze target as measured by reference eye tracker'.
 This value can be used to filter out data points where the user was not actively looking at the gaze target when the camera snapshot was taken.
 It can also be used to make relative accuracy observations between the reference eye tracker and the DeepEyes prediction model results.
+If a reference eye tracker was not attached and in use during the capture session, then Confidence is set to -1.
 
 This data is then post-processed using DLib or similar head/eye feature detection to add metadata files:
 
@@ -179,6 +202,12 @@ appleRightEye/{frameId}.jpg
 ```
 
 ## Changelog
+
+2021-08-18
+
+* Noted that session metadata files as optional, as device model is now stored in the folder path
+* And other metadata can be inferred from the device model, orientation is not variable in our
+* capture app, and we only have one model of eye tracker in use
 
 2020-07-27
 
