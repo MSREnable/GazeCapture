@@ -1,0 +1,19 @@
+{
+    "configurations": [
+        {
+            "name": "Step 1: ROI Detection",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "Step 1: ROI Detection",
+            "python": {
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}",
+                        "remoteRoot": "/app"
+                    }
+                ],
+                "projectType": "general"
+            }
+        }
+    ]
+}
